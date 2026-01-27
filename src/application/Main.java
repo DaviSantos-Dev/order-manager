@@ -1,3 +1,7 @@
+package application;
+
+import domain.entities.Produto;
+
 public class Main {
     public static void main(String[] args) {
         //Criando produtos

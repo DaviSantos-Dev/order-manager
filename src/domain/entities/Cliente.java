@@ -1,14 +1,24 @@
-public class Cliente extends ListaDeClientes{
+// Cria um objeto cliente, e define suas permissões (domain?)
+
+package domain.entities;
+import domain.Enums.TipoCliente;
+
+public class Cliente{
     //Atributos
     private final int idCliente;
     private String nomeCliente;
-    private String tipoCliente;
+    private TipoCliente tipoCliente;
 
     //Construtor
     public Cliente (int id, String nome, boolean vip){
-        idCliente = lastIdUser + 1;
+        idCliente = id + 1;
         nomeCliente = nome;
         ativarVip(vip); // Usado o metodo para não permitir uma entrada diferente dos padrões do metodo
+    }
+    public Cliente(){
+        this.idCliente = 0;
+        this.nomeCliente = "Anônimo";
+        this.tipoCliente = TipoCliente.NON_USER;
     }
 
     //Getters e Setters
@@ -21,12 +31,12 @@ public class Cliente extends ListaDeClientes{
     public void setNomeCliente(String nome){
         nomeCliente = nome;
     }
-    public String getTipoCliente(){
+    public TipoCliente getTipoCliente(){
         return tipoCliente;
     }
 
     //Metodos
     public void ativarVip(boolean estado){
-        tipoCliente = (estado) ? "Vip" : "Normal";
+        tipoCliente = (estado) ? TipoCliente.VIP : TipoCliente.NORMAL;
     }
 }

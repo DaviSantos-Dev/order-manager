@@ -1,3 +1,5 @@
+package domain.entities;// Ele leva o produto para o pedido (Quase como um objeto de relacionamento)
+
 public class ItemPedido {
     //Atributos
     private Produto produto;
@@ -25,7 +27,7 @@ public class ItemPedido {
     //ToString
     @Override
     public String toString(){
-        return "Produto: " + produto.getNomeProduto() + "\n" +
+        return "domain.entities.Produto: " + produto.getNomeProduto() + "\n" +
                 "Quantidade: " + produto.getPrecoProduto();
     }
 }

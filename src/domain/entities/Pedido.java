@@ -1,3 +1,7 @@
+//Faz uma lista de ItemPedido (entitie)
+
+package domain.entities;
+import domain.Enums.StatusPedido;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +65,8 @@ public class Pedido {
     @Override
     public String toString(){
         return "ID: " + idPedido + "\n" +
-                "Cliente: " + cliente + "\n" +
-                "Produto: " + produtos + "\n" +
+                "domain.entities.Cliente: " + cliente + "\n" +
+                "domain.entities.Produto: " + produtos + "\n" +
                 "Status: " + statusPedido + "\n";
     }
 }

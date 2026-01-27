@@ -1,3 +1,6 @@
+//É apenas uma classe para criar novos produtos
+
+package domain.entities;
 public class Produto {
     //Atributos
     private int idProduto;
@@ -12,11 +15,14 @@ public class Produto {
         nomeProduto = nome;
         precoProduto = preco;
         estoqueProduto = estoque;
+        produtoAtivo = true;
     }
     public Produto(int id, String nome, double preco){
         idProduto = id + 1;
         nomeProduto = nome;
         precoProduto = preco;
+        estoqueProduto = 0;
+        produtoAtivo = true;
     }
 
     //Getters e Setters

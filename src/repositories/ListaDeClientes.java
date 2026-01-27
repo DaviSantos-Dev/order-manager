@@ -1,3 +1,7 @@
+//Cria e lista usuários, e também define o id do usuário (repositories)
+
+package repositories;
+import domain.entities.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-// Cria um objeto cliente, e define suas permissões (domain?)
+// Cria um objeto cliente, e define suas permissões
 
 package domain.entities;
 import domain.Enums.TipoCliente;
@@ -13,7 +13,7 @@ public class Cliente{
     public Cliente (int id, String nome, boolean vip){
         idCliente = id + 1;
         nomeCliente = nome;
-        ativarVip(vip); // Usado o metodo para não permitir uma entrada diferente dos padrões do metodo
+        ativarVip(vip);
     }
     public Cliente(){
         this.idCliente = 0;

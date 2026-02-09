@@ -1,28 +1,28 @@
 //É apenas uma classe para criar novos produtos
 
 package domain.entities;
+import domain.Enums.StatusProduto;
+
 public class Produto {
     //Atributos
     private int idProduto;
     private String nomeProduto;
     private double precoProduto;
     private int estoqueProduto;
-    private boolean produtoAtivo;
+    private StatusProduto statusProduto;
 
     //Constructor
-    public Produto(int id, String nome, double preco, int estoque){
-        idProduto = id + 1;
+    public Produto(String nome, double preco, int estoque){
         nomeProduto = nome;
         precoProduto = preco;
         estoqueProduto = estoque;
-        produtoAtivo = true;
+        statusProduto = StatusProduto.ATIVO;
     }
-    public Produto(int id, String nome, double preco){
-        idProduto = id + 1;
+    public Produto(String nome, double preco){
         nomeProduto = nome;
         precoProduto = preco;
         estoqueProduto = 0;
-        produtoAtivo = true;
+        statusProduto = StatusProduto.SEM_ESTOQUE;
     }
 
     //Getters e Setters
@@ -40,6 +40,9 @@ public class Produto {
     }
     public int getEstoqueProduto(){
         return estoqueProduto;
+    }
+    public StatusProduto getStatusProduto(){
+        return statusProduto;
     }
 
     //Metodos

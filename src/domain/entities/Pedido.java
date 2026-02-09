@@ -1,4 +1,4 @@
-//Faz uma lista de ItemPedido (entitie)
+//Faz uma lista de ItemPedido
 
 package domain.entities;
 import domain.Enums.StatusPedido;
@@ -32,15 +32,11 @@ public class Pedido {
     }
 
     //Metodos
-    public void mostrarPedido(){
-        int index = 1;
-        for (ItemPedido item : produtos){
-            System.out.println("======================");
-            System.out.println("Item Nº" + index + ":");
-            System.out.println(item.toString());
-            System.out.println("======================");
-            index++;
-        }
+    public void adicionarItem(ItemPedido item){
+        produtos.add(item);
+    }
+    public void removerItem(ItemPedido item){
+        produtos.remove(item);
     }
     public double calcularTotal(){
         double total = 0;

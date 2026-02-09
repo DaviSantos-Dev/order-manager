@@ -1,5 +1,9 @@
-package console;
+//Reponsável por gerar as interfaces para o terminal
 
+package console;
+import domain.entities.ItemPedido;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class SystemUi {
@@ -22,6 +26,18 @@ public class SystemUi {
         if (!nome.isEmpty()) {
             System.out.print("Deseja ser VIP(S/N)? ");
             String opcao = scan.nextLine();
+        }
+    }
+
+    //Não sei ainda
+    public void mostrarPedido(List<ItemPedido> produtos){
+        int index = 1;
+        for (ItemPedido item : produtos){
+            System.out.println("======================");
+            System.out.println("Item Nº" + index + ":");
+            System.out.println(item.toString());
+            System.out.println("======================");
+            index++;
         }
     }
 

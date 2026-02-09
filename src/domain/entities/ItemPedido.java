@@ -1,4 +1,6 @@
-package domain.entities;// Ele leva o produto para o pedido (Quase como um objeto de relacionamento)
+// Ele leva o produto para o pedido (Quase como um objeto de relacionamento)
+
+package domain.entities;
 
 public class ItemPedido {
     //Atributos
@@ -21,13 +23,13 @@ public class ItemPedido {
 
     //Metodos
     public double calcularSubTotal(Produto produto){
-        return produto.getPrecoProduto() * this.quantidade;
+        return produto.getPrecoProduto() * quantidade;
     }
 
     //ToString
     @Override
     public String toString(){
         return "domain.entities.Produto: " + produto.getNomeProduto() + "\n" +
-                "Quantidade: " + produto.getPrecoProduto();
+                "Quantidade: " + quantidade;
     }
 }

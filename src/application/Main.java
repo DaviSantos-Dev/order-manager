@@ -1,9 +1,21 @@
 package application;
 
+import domain.repositories.ClientRepository;
+import domain.repositories.OrderRepository;
+import domain.repositories.ProductRepository;
+import infra.ClientRepositoryInMemory;
+import infra.OrderRepositoryInMemory;
+import infra.ProductRepositoryInMemory;
+
 public class Main {
 
     public static void main(String[] args) {
-        //Iniciando o sistema
+        //Inicializando repositórios
+        ClientRepository clientRepository = new ClientRepositoryInMemory();
+        ProductRepository productRepository = new ProductRepositoryInMemory();
+        OrderRepository orderRepository = new OrderRepositoryInMemory();
+
+
 
 
         /*Criando produtos

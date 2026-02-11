@@ -1,11 +1,16 @@
-//Cria e lista usuários, e também define o id do usuário
-
 package domain.repositories;
 import domain.entities.Cliente;
-import java.util.ArrayList;
+
 import java.util.List;
 
-public class ListaDeClientes {
+public interface ClienteRepository {
+    //Contrato
+    void adicionar(Cliente cliente);
+    List<Cliente> listarClientes();
+    Cliente buscarPorId(int id);
+    List<Cliente> buscarPorNome(String nome);
+}
+/*public class ClienteRepository {
     //Atributos
     private List<Cliente> clientes = new ArrayList<>();
     private int lastId = 0;
@@ -39,4 +44,4 @@ public class ListaDeClientes {
         }
         return newList;
     }
-}
+}*/

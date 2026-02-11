@@ -1,28 +1,31 @@
-package domain.repositories;
+package infra;
 
 import domain.entities.Produto;
+import domain.repositories.ProdutoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaDeProdutos {
+public class ProdutoRepositoryInMemory implements ProdutoRepository {
     //Atributos
     private List<Produto> produtos = new ArrayList<>();
-    private int lastId = 0;
 
-    //Getters e Setters
-    public List<Produto>  getProdutos() {
-        return produtos;
-    }
-    public int getLastId() {
-        return lastId;
+    //Construtor
+    public ProdutoRepositoryInMemory() {} //Sempre deve ser instanciado vazio.
+
+    //Métodos
+    @Override
+    public void adicionarProduto(Produto produto) {
+
     }
 
-    //Metodos
-    public void addProduto(Produto produto){
-        produtos.add(produto);
+    @Override
+    public List<Produto> listarProdutos() {
+        return List.of();
     }
-    public Produto buscarPorId(int id){
+
+    @Override
+    public Produto buscarPorId(int id) {
         for (Produto produto : produtos) {
             if (produto.getIdProduto() == id){
                 return produto;
@@ -30,7 +33,9 @@ public class ListaDeProdutos {
         }
         return null;
     }
-    public List<Produto> buscarPorNome(String nome){
+
+    @Override
+    public List<Produto> buscarPorNome(String nome) {
         List<Produto> newList = new ArrayList<>();
         for (Produto produto : produtos) {
             if (produto.getNomeProduto().toLowerCase().equals(nome.toLowerCase())){
@@ -39,5 +44,4 @@ public class ListaDeProdutos {
         }
         return newList;
     }
-
 }

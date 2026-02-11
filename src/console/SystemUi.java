@@ -45,7 +45,7 @@ public class SystemUi {
     public void cadastrarUsuario(){
         String novoNome = solicitarNome();
         String novoSenha = solicitarSenha();
-        //Restante da implementação junto com usecase
+        //Restante da implementação com usecase
     }
 
     public int telaInicial(){

@@ -47,7 +47,11 @@ public class Produto {
 
     //Metodos
     public void reduzirEstoque(int quantidade){
-        estoqueProduto -= quantidade;
+        if (quantidade <= estoqueProduto) {
+            estoqueProduto -= quantidade;
+        } else{
+            throw new RuntimeException("Estoque insuficiente");
+        }
     }
     public void aumentarEstoque(int quantidade){
         estoqueProduto += quantidade;

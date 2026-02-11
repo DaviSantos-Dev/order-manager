@@ -1,8 +1,15 @@
 package application;
 import domain.entities.Produto;
 
+import java.util.Scanner;
+
 public class Main {
+    public static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
+        //Iniciando o sistema
+
+
         /*Criando produtos
         ("Notebook Dell Inspiron", 3500.00, 10);
         ("Mouse Gamer Logitech", 150.90, 50);

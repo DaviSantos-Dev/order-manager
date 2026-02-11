@@ -1,7 +1,7 @@
 //É apenas uma classe para criar novos produtos
 
 package domain.entities;
-import domain.Enums.StatusProduto;
+import domain.enums.StatusProduto;
 
 public class Produto {
     //Atributos

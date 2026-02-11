@@ -1,7 +1,7 @@
 //Faz uma lista de ItemPedido
 
 package domain.entities;
-import domain.Enums.StatusPedido;
+import domain.enums.StatusPedido;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 // Cria um objeto cliente, e define suas permissões
 
 package domain.entities;
-import domain.Enums.TipoCliente;
+import domain.enums.TipoCliente;
 
 public class Cliente{
     //Atributos

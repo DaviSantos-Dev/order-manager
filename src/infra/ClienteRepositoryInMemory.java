@@ -17,7 +17,7 @@ public class ClienteRepositoryInMemory implements ClienteRepository {
     //Métodos
     @Override
     public void adicionar(Cliente cliente) {
-
+        this.clientes.add(cliente);
     }
 
     @Override

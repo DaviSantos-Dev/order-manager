@@ -1,9 +1,7 @@
 package domain.repositories;
 
-import domain.entities.Cliente;
 import domain.entities.Produto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ProdutoRepository {

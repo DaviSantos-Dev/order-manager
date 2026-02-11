@@ -16,7 +16,7 @@ public class ProdutoRepositoryInMemory implements ProdutoRepository {
     //Métodos
     @Override
     public void adicionarProduto(Produto produto) {
-
+        this.produtos.add(produto);
     }
 
     @Override

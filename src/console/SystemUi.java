@@ -1,8 +1,5 @@
-//Reponsável por gerar as interfaces para o terminal
-
 package console;
-import application.Main;
-import domain.entities.ItemPedido;
+import domain.entities.OrderItem;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -72,9 +69,9 @@ public class SystemUi {
     }
 
     //Exibição de pedido
-    public void mostrarPedido(List<ItemPedido> produtos){
+    public void mostrarPedido(List<OrderItem> produtos){
         int index = 1;
-        for (ItemPedido item : produtos){
+        for (OrderItem item : produtos){
             System.out.println("======================");
             System.out.println("Item Nº" + index + ":");
             System.out.println(item.toString());

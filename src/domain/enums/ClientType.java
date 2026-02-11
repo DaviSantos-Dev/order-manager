@@ -1,6 +1,6 @@
 package domain.enums;
 
-public enum TipoCliente {
+public enum ClientType {
     VIP,
     NORMAL,
     NON_USER

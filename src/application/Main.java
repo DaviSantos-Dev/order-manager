@@ -1,7 +1,4 @@
 package application;
-import domain.entities.Produto;
-
-import java.util.Scanner;
 
 public class Main {
 

@@ -1,10 +1,9 @@
 package application;
-
 import domain.entities.Produto;
 
 public class Main {
     public static void main(String[] args) {
-        //Criando produtos
+        /*Criando produtos
         ("Notebook Dell Inspiron", 3500.00, 10);
         ("Mouse Gamer Logitech", 150.90, 50);
         ("Teclado Mecânico Redragon", 320.50, 30);
@@ -26,6 +25,6 @@ public class Main {
         ("Roteador Wi-Fi", 190.00, 27);
         ("Tablet Lenovo", 1200.00, 11);
 
-        //
+        */
     }
 }

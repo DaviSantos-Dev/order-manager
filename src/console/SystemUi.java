@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SystemUi {
-    static Scanner scan = new Scanner(System.in);
     //Padrões para criação de telas
     public static void linhasDeSeparacao(){
         System.out.println("======================");
@@ -19,18 +18,25 @@ public class SystemUi {
     }
 
     //Criando telas para funcionamento do sistema
-    public static void telaDeLogin() {
+    public static String solicitarNome() {
+        Scanner scan = new Scanner(System.in);
         mostrarTitulo("Inicio do Sistema");
         System.out.print("Digite seu nome: ");
         String nome = scan.nextLine();
-        if (!nome.isEmpty()) {
-            System.out.print("Deseja ser VIP(S/N)? ");
-            String opcao = scan.nextLine();
-        }
+        scan.close();
+        return nome;
     }
 
-    //Não sei ainda
-    public void mostrarPedido(List<ItemPedido> produtos){
+    public static String ativarVip(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Deseja ser VIP(S/N)? ");
+        String opcao = scan.nextLine();
+        scan.close();
+        return opcao;
+    }
+
+    //Exibição de pedido
+    public static void mostrarPedido(List<ItemPedido> produtos){
         int index = 1;
         for (ItemPedido item : produtos){
             System.out.println("======================");

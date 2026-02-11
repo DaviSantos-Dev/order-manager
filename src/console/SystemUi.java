@@ -1,4 +1,5 @@
 package console;
+import domain.entities.Client;
 import domain.entities.OrderItem;
 
 import java.util.InputMismatchException;
@@ -28,25 +29,38 @@ public class SystemUi {
         System.out.print("Digite sua senha: ");
         return scan.nextLine();
     }
-    public int login(){
+    public void login(){
         mostrarTitulo("Login");
         System.out.println("Escolha sua opção:");
         System.out.println("1 - Entrar com seu usuário e senha");
         System.out.println("2 - Cadastrar novo usuário");
         System.out.println("3 - Fechar o programa");
         while (true) {
-            try {
-                int opcao = scan.nextInt();
-                return opcao;
-            } catch (InputMismatchException e) {
-                System.out.println("Opção inválida");
-            }
+                System.out.print("Sua opção: ");
+                try {
+                    int option = scan.nextInt();
+                    switch (option) {
+                        case 1:
+
+                            break;
+                        case 2:
+                            cadastrarUsuario();
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.println("Invallid option");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invallid option");
+                }
         }
     }
+
     public void cadastrarUsuario(){
         String novoNome = solicitarNome();
         String novoSenha = solicitarSenha();
-        //Restante da implementação com usecase
+
     }
 
     public int telaInicial(){
@@ -78,6 +92,11 @@ public class SystemUi {
             System.out.println("======================");
             index++;
         }
+    }
+
+    //Telas de criação
+    public void clientCreated(Client client){
+        System.out.printf("O usuario de cliente: %s, foi criado com sucesso \n", client);
     }
 
 

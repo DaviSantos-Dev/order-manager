@@ -5,12 +5,14 @@ public class Client {
     //Atributos
     private final int clientId;
     private String clientName;
+    private String clientPassword;
     private ClientType clientType;
 
     //Construtor
-    public Client(int id, String name, boolean vip){
+    public Client(int id, String name,String password, boolean vip){
         clientId = id + 1;
         clientName = name;
+        clientPassword = password;
         activateVip(vip);
     }
     public Client(){
@@ -32,10 +34,15 @@ public class Client {
     public ClientType getClientType() {
         return clientType;
     }
+    public String getClientPassword() {
+        return clientPassword;
+    }
 
     //Metodos
     public void activateVip(boolean vip){
-        if(clientType != ClientType.NON_USER){}
+        if(clientType != ClientType.NON_USER){
+            throw  new IllegalArgumentException("Sò é possível ativar VIP para clientes cadastrados");
+        }
         clientType = (vip) ? ClientType.VIP : ClientType.NORMAL;
     }
 }

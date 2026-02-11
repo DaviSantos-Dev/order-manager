@@ -45,4 +45,25 @@ public class ClientRepositoryInMemory implements ClientRepository {
         }
         return newList;
     }
+
+    @Override
+    public int nextId(){
+        int nextId = 1;
+        for (Client client : clients) {
+            if (client.getClientId() >= nextId){
+                nextId = client.getClientId() + 1;
+            }
+        }
+        return nextId;
+    }
+
+    @Override
+    public boolean passwordValidation(String password){
+        for (Client client : clients) {
+            if (client.getClientPassword().equals(password)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

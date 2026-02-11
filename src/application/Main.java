@@ -1,11 +1,13 @@
 package application;
 
+import console.SystemUi;
 import domain.repositories.ClientRepository;
 import domain.repositories.OrderRepository;
 import domain.repositories.ProductRepository;
 import infra.ClientRepositoryInMemory;
 import infra.OrderRepositoryInMemory;
 import infra.ProductRepositoryInMemory;
+import usecase.CreateClientUseCase;
 
 public class Main {
 
@@ -15,7 +17,14 @@ public class Main {
         ProductRepository productRepository = new ProductRepositoryInMemory();
         OrderRepository orderRepository = new OrderRepositoryInMemory();
 
+        //Inicializando Ui
+        SystemUi userInterface = new SystemUi();
 
+        //Inicializando Usecases
+        CreateClientUseCase newClientUseCase = new CreateClientUseCase(clientRepository);
+
+        //Iniciando Sistema
+        userInterface.login();
 
 
         /*Criando produtos

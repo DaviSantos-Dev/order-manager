@@ -14,28 +14,3 @@ public interface ProdutoRepository {
     List<Produto> buscarPorNome(String nome);
 }
 
-/*public class ProdutoRepository {
-    //Atributos
-    private List<Produto> produtos = new ArrayList<>();
-    private int lastId = 0;
-
-    //Getters e Setters
-    public List<Produto>  getProdutos() {
-        return produtos;
-    }
-    public int getLastId() {
-        return lastId;
-    }
-
-    //Metodos
-    public void addProduto(Produto produto){
-        produtos.add(produto);
-    }
-    public Produto buscarPorId(int id){
-
-    }
-    public List<Produto> buscarPorNome(String nome){
-
-    }
-
-}*/

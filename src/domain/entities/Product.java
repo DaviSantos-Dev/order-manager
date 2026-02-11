@@ -44,14 +44,25 @@ public class Product {
     }
 
     //Metodos
-    public void decreaseQuantity(int quantity){
+    public void decreaseQuantity(int quantity) {
         if (quantity <= productQuantity) {
-            productQuantity -= quantity;
-        } else{
-            throw new RuntimeException("Insufficient quantity");
+            throw new IllegalArgumentException("A quantidade deve maior que zero");
         }
+        if (productQuantity < quantity) {
+            throw new IllegalStateException("Insufficient quantity");
+        }
+        if (productQuantity == quantity) {
+            productQuantity -= quantity;
+            productStatus = ProductStatus.INACTIVE;
+        }
+        productQuantity -= quantity;
     }
+
     public void increaseQuantity(int quantity){
+        if (productQuantity == 0) {
+            productQuantity += quantity;
+            productStatus = ProductStatus.ACTIVE;
+        }
         productQuantity += quantity;
     }
 }

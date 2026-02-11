@@ -2,6 +2,6 @@ package domain.enums;
 
 public enum ProductStatus {
     ACTIVE,
-    INATIVE,
+    INACTIVE,
     OUT_OF_STOCK
 }

@@ -57,7 +57,7 @@ public class ClientRepositoryInMemory implements ClientRepository {
     }
 
     @Override
-    public boolean emailValidation(String email){
+    public boolean emailExists(String email){
         for (Client client : clients) {
             if (client.getClientEmail().equals(email)){
                 return false;

@@ -10,6 +10,6 @@ public interface ClientRepository {
     Client searchById(int id);
     List<Client> searchByName(String nome);
     int nextId();
-    boolean emailValidation(String email);
+    boolean emailExists(String email);
 }
 

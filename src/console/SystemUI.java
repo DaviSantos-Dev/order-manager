@@ -2,12 +2,11 @@ package console;
 import domain.entities.Client;
 import domain.entities.OrderItem;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class SystemUi {
-    public static Scanner scan = new Scanner(System.in);
+public abstract class SystemUI {
+    protected static Scanner scan = new Scanner(System.in);
 
     //Padrões para criação de telas
     public void separationRows(){
@@ -19,7 +18,7 @@ public abstract class SystemUi {
         separationRows();
     }
 
-    //Padrões de I/O
+    //Clients I/O
     public String enterName() {
         System.out.print("Digite seu nome: ");
         return scan.nextLine();
@@ -34,31 +33,25 @@ public abstract class SystemUi {
         System.out.print("Digite sua senha: ");
         return scan.nextLine();
     }
-
-
     public void createUserUi(){
         String novoNome = enterName();
         String novoSenha = enterPassword();
     }
 
-    public int telaInicial(){
-        int opcao = 0;
-        showTitle("Inicio do Sistema");
-        System.out.println("Escolha uma opção:");
-        System.out.println("1 - Criar Pedido");
-        System.out.println("2 - Consultar Pedido");
-        System.out.println("3 - Encerrar programa");
-        separationRows();
-        System.out.print("Sua opção: ");
-        while (true){
-            try {
-                opcao = Integer.parseInt(scan.nextLine());
-                return opcao;
-            } catch (InputMismatchException e) {
-                System.out.println("Erro: 'Valor inválido'");
-            }
-        }
+    //Orders I/O
+    public String enterProductName(){
+        System.out.print("Qual produto deseja? ");
+        return scan.nextLine();
     }
+    public int enterProductCode(){
+        System.out.println("Digite o código do produto que deseja: ");
+        return Integer.parseInt(scan.nextLine());
+    }
+    public int enterQuantity(){
+        System.out.print("Quantos deseja? ");
+        return Integer.parseInt(scan.nextLine());
+    }
+
 
     //Exibição de pedido
     public void mostrarPedido(List<OrderItem> produtos){

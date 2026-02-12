@@ -33,6 +33,9 @@ public class Product {
     public int getIdProduto() {
         return productId;
     }
+    public void setIdProduto(int productId) {
+        this.productId = productId;
+    }
     public double getProductPrice(){
         return productPrice;
     }
@@ -43,7 +46,7 @@ public class Product {
         return productStatus;
     }
 
-    //Metodos
+    //Métodos
     public void decreaseQuantity(int quantity) {
         if (quantity <= productQuantity) {
             throw new IllegalArgumentException("A quantidade deve maior que zero");

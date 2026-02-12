@@ -1,4 +1,4 @@
-package usecase;
+package usecase.client;
 
 import domain.entities.Client;
 import domain.exceptions.BusinessRuleException;
@@ -17,8 +17,8 @@ public class AuthClientUseCase {
 
     //Executor
     public Client execute(String email, String password) {
-        List<Client> clients = clientRepository.listClients();
-        for (Client client : clients) {
+        List<Client> listOfClient = clientRepository.listClients();
+        for (Client client : listOfClient) {
             if (client.getClientEmail().equals(email) && client.getClientPassword().equals(password)) {
                 return client;
             }

@@ -1,6 +1,7 @@
 package infra;
 
 import domain.entities.Product;
+import domain.exceptions.BusinessRuleException;
 import domain.repositories.ProductRepository;
 
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ public class ProductRepositoryInMemory implements ProductRepository {
     //Métodos
     @Override
     public void addProduct(Product product) {
-        this.products.add(product);
+        products.add(product);
+        product.setIdProduto(nextId());
     }
 
     @Override
     public List<Product> listProducts() {
-        return List.of();
+        return new ArrayList<>(products);
     }
 
     @Override
@@ -31,17 +33,27 @@ public class ProductRepositoryInMemory implements ProductRepository {
                 return product;
             }
         }
-        return null;
+        throw new BusinessRuleException("Product not found");
     }
 
     @Override
     public List<Product> searchByName(String nome) {
         List<Product> newList = new ArrayList<>();
         for (Product product : products) {
-            if (product.getProductName().toLowerCase().equals(nome.toLowerCase())){
+            if (product.getProductName().equalsIgnoreCase(nome)){
                 newList.add(product);
             }
         }
         return newList;
+    }
+
+    private int nextId(){
+        int currentId = 1;
+        for (Product product : products) {
+            if (product.getIdProduto() > currentId){
+                currentId = product.getIdProduto() + 1;
+            }
+        }
+        return currentId;
     }
 }

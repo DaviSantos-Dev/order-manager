@@ -1,11 +1,11 @@
-package usecase;
+package usecase.client;
 
 import domain.entities.Client;
 import domain.exceptions.BusinessRuleException;
 import domain.repositories.ClientRepository;
 
 public class CreateClientUseCase {
-    //Atributos
+    //Repositories
     private final ClientRepository clientRepository;
 
     //Construtor
@@ -23,7 +23,7 @@ public class CreateClientUseCase {
         if(password == null || password.isBlank()){
             throw new BusinessRuleException("Password cannot be empty");
         }
-        if(!clientRepository.emailValidation(email)){
+        if(!clientRepository.emailExists(email)){
             throw new BusinessRuleException("Email already exists");
         }
         Client client = new Client(currentId, clientName,email,  password, vip);

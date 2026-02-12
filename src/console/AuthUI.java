@@ -2,39 +2,41 @@
 package console;
 import domain.entities.Client;
 import domain.exceptions.BusinessRuleException;
-import usecase.AuthClientUseCase;
+import usecase.client.AuthClientUseCase;
 
 import java.util.InputMismatchException;
 
-public class AuthUi extends SystemUi{
+public class AuthUI extends SystemUI {
     //Atributos
-    AuthClientUseCase authClient;
+    AuthClientUseCase authClientUseCase;
 
     //Construtor
-    public AuthUi(AuthClientUseCase authClient) {
-        this.authClient = authClient;
+    public AuthUI(AuthClientUseCase authClientUseCase) {
+        this.authClientUseCase = authClientUseCase;
     }
 
-    public void initialize(){
-        boolean systemRunning = true;
-        while (systemRunning) {
+    public Client start(){
+        boolean authClientIsrunning = true;
+        while (authClientIsrunning) {
             showTitle("Formas de Login");
             System.out.println("Escolha sua opção:");
             System.out.println("1 - Entrar com seu usuário e senha");
             System.out.println("2 - Cadastrar novo usuário");
-            System.out.println("3 - Fechar o programa");
+            System.out.println("3 - Entrar sem usuário");
+            System.out.println("4 - Fechar o programa");
             System.out.print("Sua opção: ");
             try {
                 int option = Integer.parseInt(scan.nextLine());
                 switch (option) {
                     case 1:
-                        loginInterface();
-                        break;
+                         return loginInterface();
                     case 2:
                         createUserUi();
                         break;
                     case 3:
-                        systemRunning = false;
+
+                    case 4:
+                        authClientIsrunning = false;
                         break;
                     default:
                         System.out.println("Invallid option");
@@ -47,17 +49,22 @@ public class AuthUi extends SystemUi{
                 System.out.println("Only numbers can be accepted");
             }
         }
+        throw new RuntimeException();
     }
-    public void loginInterface(){
+    public Client loginInterface(){
         showTitle("Login");
         String email = enterEmail();
         String password = enterPassword();
+        Client client;
         try {
-            Client client = authClient.execute(email, password);
-
+            client = authClientUseCase.execute(email, password);
+            return client;
         } catch (BusinessRuleException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
         }
+        throw new RuntimeException("Unexpected error: Bababoi");
     }
 
 

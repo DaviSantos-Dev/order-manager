@@ -1,15 +1,15 @@
 package application;
 
-import console.AuthUi;
-import console.SystemUi;
+import console.AuthUI;
+import domain.entities.Client;
 import domain.repositories.ClientRepository;
 import domain.repositories.OrderRepository;
 import domain.repositories.ProductRepository;
 import infra.ClientRepositoryInMemory;
 import infra.OrderRepositoryInMemory;
 import infra.ProductRepositoryInMemory;
-import usecase.AuthClientUseCase;
-import usecase.CreateClientUseCase;
+import usecase.client.AuthClientUseCase;
+import usecase.client.CreateClientUseCase;
 
 public class Main {
 
@@ -19,15 +19,18 @@ public class Main {
         ProductRepository productRepository = new ProductRepositoryInMemory();
         OrderRepository orderRepository = new OrderRepositoryInMemory();
 
+        //Adicionando user anônimo
+        clientRepository.addClient(new Client());
+
         //Inicializando Usecases
         CreateClientUseCase newClientUseCase = new CreateClientUseCase(clientRepository);
         AuthClientUseCase authClientUseCase = new AuthClientUseCase(clientRepository);
 
         //Inicializando Ui
-        AuthUi userInterface = new AuthUi(authClientUseCase);
+        AuthUI userInterface = new AuthUI(authClientUseCase);
 
         //Iniciando Sistema
-        userInterface.initialize();
+        userInterface.start();
 
 
 

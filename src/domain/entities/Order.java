@@ -11,8 +11,7 @@ public class Order {
     private OrderStatus orderStatus;;
 
     //Construtor
-    public Order(int orderId, Client client){
-        this.OrderId = orderId;
+    public Order(Client client){
         this.client = client;
         this.Products = new ArrayList<OrderItem>();
         this.orderStatus = OrderStatus.CREATED;
@@ -21,6 +20,9 @@ public class Order {
     //Getters e Setters
     public int getOrderId() {
         return this.OrderId;
+    }
+    public void setOrderId(int OrderId) {
+        this.OrderId = OrderId;
     }
     public Client getClient() {
         return this.client;

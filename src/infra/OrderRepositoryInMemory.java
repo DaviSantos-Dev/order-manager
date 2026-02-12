@@ -1,6 +1,8 @@
 package infra;
 
 import domain.entities.Order;
+import domain.entities.Product;
+import domain.exceptions.BusinessRuleException;
 import domain.repositories.OrderRepository;
 
 import java.util.ArrayList;
@@ -11,11 +13,18 @@ public class OrderRepositoryInMemory implements OrderRepository {
     List<Order> orders =  new ArrayList<>();
 
     //Construtor
+    public OrderRepositoryInMemory() {} //Sempre deve ser instanciado vazio.
 
     //Métodos
     @Override
     public void addOrder(Order order) {
-        orders.add(order)      ;
+        try{
+            orders.add(order);
+            order.setOrderId(nextId());
+        } catch (RuntimeException e) {
+            throw new BusinessRuleException("Error: Order couldn't  be added!");
+        }
+
     }
 
     @Override
@@ -30,7 +39,7 @@ public class OrderRepositoryInMemory implements OrderRepository {
                 return order;
             }
         }
-        return null;
+        throw new BusinessRuleException("Order not found");
     }
 
     @Override
@@ -41,5 +50,16 @@ public class OrderRepositoryInMemory implements OrderRepository {
                 newList.add(order);
             }
         }
-        return newList;    }
+        return newList;
+    }
+
+    private int nextId(){
+        int currentId = 1;
+        for (Order order : orders) {
+            if (order.getOrderId() > currentId){
+                currentId = order.getOrderId() + 1;
+            }
+        }
+        return currentId;
+    }
 }

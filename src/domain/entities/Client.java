@@ -20,6 +20,8 @@ public class Client {
     public Client(){
         this.clientId = 0;
         this.clientName = "Anonymous";
+        this.clientEmail = "empty";
+        this.clientPassword = "empty";
         this.clientType = ClientType.NON_USER;
     }
 

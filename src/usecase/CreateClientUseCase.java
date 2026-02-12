@@ -13,16 +13,20 @@ public class CreateClientUseCase {
         this.clientRepository = clientRepository;
     }
 
-    public Client execute(String clientName,String password, boolean vip){
+    //Executor
+    public Client execute(String clientName,String email,String password, boolean vip){
         int currentId = clientRepository.nextId();
 
-        if(clientName == null || clientName.isEmpty() || clientName.isBlank()){
+        if(clientName == null || clientName.isBlank()){
             throw new BusinessRuleException("Client name cannot be empty");
         }
-        if(!clientRepository.passwordValidation(password)){
-            throw new BusinessRuleException("Password already exists");
+        if(password == null || password.isBlank()){
+            throw new BusinessRuleException("Password cannot be empty");
         }
-        Client client = new Client(currentId, clientName, password, vip);
+        if(!clientRepository.emailValidation(email)){
+            throw new BusinessRuleException("Email already exists");
+        }
+        Client client = new Client(currentId, clientName,email,  password, vip);
         clientRepository.addClient(client);
 
         return client;

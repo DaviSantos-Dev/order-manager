@@ -13,7 +13,6 @@ public class ClientRepositoryInMemory implements ClientRepository {
     //Construtor
     public ClientRepositoryInMemory() {} //Sempre deve ser instanciado vazio.
 
-
     //Métodos
     @Override
     public void addClient(Client client) {
@@ -22,7 +21,7 @@ public class ClientRepositoryInMemory implements ClientRepository {
 
     @Override
     public List<Client> listClients() {
-        return List.of();
+        return new ArrayList<>(clients);
     }
 
     @Override
@@ -58,12 +57,13 @@ public class ClientRepositoryInMemory implements ClientRepository {
     }
 
     @Override
-    public boolean passwordValidation(String password){
+    public boolean emailValidation(String email){
         for (Client client : clients) {
-            if (client.getClientPassword().equals(password)){
+            if (client.getClientEmail().equals(email)){
                 return false;
             }
         }
         return true;
     }
+
 }

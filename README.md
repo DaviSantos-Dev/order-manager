@@ -120,7 +120,7 @@ O projeto representa uma transição de código funcional para código estrutura
 
 ### Passos
 
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/DaviSantos-Dev/order-manager.git
 Abrir o projeto na IDE (preferencialmente IntelliJ) e executar a classe Main.
 A aplicação é configurada automaticamente e inicia via console.
 

@@ -19,6 +19,9 @@ public class CreateOrderUseCase {
 
     //Executor
     public Order execute(Client client, List<OrderItem> orderItems){
+        if (client.getClientId() == 0){
+            throw new BusinessRuleException("Error: you cannot create a order without a user");
+        }
         try{
             Order newOrder = new Order(client);
             orderItems.forEach(newOrder::addItem);
@@ -27,6 +30,6 @@ public class CreateOrderUseCase {
         } catch (BusinessRuleException e){
             System.out.println(e.getMessage());
         }
-        throw new BusinessRuleException("Error: Order couldn't  be added!");
+        throw new BusinessRuleException("Error: Order couldn't be added!");
     }
 }

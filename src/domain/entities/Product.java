@@ -48,7 +48,7 @@ public class Product {
 
     //Métodos
     public void decreaseQuantity(int quantity) {
-        if (quantity <= productQuantity) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException("A quantidade deve maior que zero");
         }
         if (productQuantity < quantity) {
@@ -57,8 +57,9 @@ public class Product {
         if (productQuantity == quantity) {
             productQuantity -= quantity;
             productStatus = ProductStatus.INACTIVE;
+        }else {
+            productQuantity -= quantity;
         }
-        productQuantity -= quantity;
     }
 
     public void increaseQuantity(int quantity){

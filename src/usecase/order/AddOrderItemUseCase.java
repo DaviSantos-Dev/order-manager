@@ -19,10 +19,11 @@ public class AddOrderItemUseCase {
         try{
             Product product = productRepository.searchById(productCode);
             OrderItem orderItem = new OrderItem(product, quantity);
+            return orderItem;
         }
         catch (BusinessRuleException e){
             System.out.println("Error: " + e.getMessage());
         }
-        throw new RuntimeException("Not expected error.");
+        throw new RuntimeException("Unexpected error.");
     }
 }

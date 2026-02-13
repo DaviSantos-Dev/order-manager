@@ -29,7 +29,7 @@ public class OrderRepositoryInMemory implements OrderRepository {
 
     @Override
     public List<Order> listOrders() {
-        return List.of();
+        return new ArrayList<>(orders);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class OrderItem {
     }
 
     //Metodos
-    public double calculateSubTotal(Product product){
+    public double calculateSubTotal(){
         return product.getProductPrice() * quantity;
     }
 

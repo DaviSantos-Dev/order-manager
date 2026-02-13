@@ -11,7 +11,6 @@ public class Client {
 
     //Construtor
     public Client(String name,String email, String password, boolean vip){
-        this.clientId = 1;
         clientName = name;
         clientEmail = email;
         clientPassword = password;

@@ -3,19 +3,22 @@ package console;
 import domain.entities.Client;
 import domain.exceptions.BusinessRuleException;
 import usecase.client.AuthClientUseCase;
+import usecase.client.NonUserEntryUseCase;
 
 import java.util.InputMismatchException;
 
 public class AuthUI extends SystemUI {
     //UseCases
     private AuthClientUseCase authClientUseCase;
+    private NonUserEntryUseCase nonUserEntryUseCase;
 
     //Interfaces aux
     private ClientUI clientUI;
 
     //Construtor
-    public AuthUI(AuthClientUseCase authClientUseCase,  ClientUI clientUI) {
+    public AuthUI(AuthClientUseCase authClientUseCase, NonUserEntryUseCase nonUserEntryUseCase ,  ClientUI clientUI) {
         this.authClientUseCase = authClientUseCase;
+        this.nonUserEntryUseCase = nonUserEntryUseCase;
         this.clientUI = clientUI;
     }
 
@@ -38,7 +41,7 @@ public class AuthUI extends SystemUI {
                         clientUI.createUser();
                         break;
                     case 3:
-                        break;
+                        return nonUserEntryUseCase.execute();
                     case 4:
                         authClientIsrunning = false;
                         break;

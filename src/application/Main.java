@@ -13,6 +13,7 @@ import infra.OrderRepositoryInMemory;
 import infra.ProductRepositoryInMemory;
 import usecase.client.AuthClientUseCase;
 import usecase.client.CreateClientUseCase;
+import usecase.client.NonUserEntryUseCase;
 import usecase.order.AddOrderItemUseCase;
 import usecase.order.CreateOrderUseCase;
 
@@ -25,8 +26,7 @@ public class Main {
         OrderRepository orderRepository = new OrderRepositoryInMemory();
 
         //Adicionando user anônimo
-        int firstId = 0;
-        clientRepository.addClient(new Client(), firstId);
+        clientRepository.addClient(new Client());
 
         //Inicializando Usecases
         CreateClientUseCase newClient = new CreateClientUseCase(clientRepository);
@@ -34,10 +34,11 @@ public class Main {
 
         AddOrderItemUseCase addOrder = new AddOrderItemUseCase(productRepository);
         CreateOrderUseCase createOrder = new CreateOrderUseCase(orderRepository);
+        NonUserEntryUseCase nonUserEntry = new NonUserEntryUseCase(clientRepository);
 
         //Inicializando Ui
         ClientUI clientUI = new ClientUI(clientRepository, newClient);
-        AuthUI authUI = new AuthUI(authClient, clientUI);
+        AuthUI authUI = new AuthUI(authClient, nonUserEntry, clientUI);
         OrderUI orderUI = new OrderUI(addOrder, createOrder);
         MainMenuUI userInterface = new MainMenuUI(clientUI, authUI,orderUI);
 

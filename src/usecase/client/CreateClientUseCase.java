@@ -15,8 +15,6 @@ public class CreateClientUseCase {
 
     //Executor
     public Client execute(String name, String email, String password, boolean vip){
-        int currentId = clientRepository.nextId();
-
         if(name == null || name.isBlank()){
             throw new BusinessRuleException("Client name cannot be empty");
         }

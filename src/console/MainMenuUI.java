@@ -1,6 +1,7 @@
 package console;
 
 import domain.entities.Client;
+import domain.exceptions.BusinessRuleException;
 
 import java.util.InputMismatchException;
 
@@ -52,8 +53,10 @@ public class MainMenuUI extends SystemUI {
                         break;
                 }
 
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Erro: 'Valor inválido'");
+            } catch (BusinessRuleException e){
+                System.out.println(e.getMessage());
             }
         }
     }

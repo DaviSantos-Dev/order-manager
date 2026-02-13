@@ -3,15 +3,15 @@ import domain.enums.ClientType;
 
 public class Client {
     //Atributos
-    private final int clientId;
+    private int clientId;
     private String clientName;
     private String clientEmail;
     private String clientPassword;
     private ClientType clientType;
 
     //Construtor
-    public Client(int id, String name,String email, String password, boolean vip){
-        clientId = id + 1;
+    public Client(String name,String email, String password, boolean vip){
+        this.clientId = 1;
         clientName = name;
         clientEmail = email;
         clientPassword = password;
@@ -28,6 +28,9 @@ public class Client {
     //Getters e Setters
     public int getClientId() {
         return clientId;
+    }
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
     public String getClientName() {
         return clientName;
@@ -47,7 +50,7 @@ public class Client {
 
     //Metodos
     public void activateVip(boolean vip){
-        if(clientType != ClientType.NON_USER){
+        if(clientType == ClientType.NON_USER){
             throw  new IllegalArgumentException("Sò é possível ativar VIP para clientes cadastrados");
         }
         clientType = (vip) ? ClientType.VIP : ClientType.NORMAL;

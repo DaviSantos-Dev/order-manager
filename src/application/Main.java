@@ -1,6 +1,9 @@
 package application;
 
 import console.AuthUI;
+import console.ClientUI;
+import console.MainMenuUI;
+import console.OrderUI;
 import domain.entities.Client;
 import domain.repositories.ClientRepository;
 import domain.repositories.OrderRepository;
@@ -10,6 +13,8 @@ import infra.OrderRepositoryInMemory;
 import infra.ProductRepositoryInMemory;
 import usecase.client.AuthClientUseCase;
 import usecase.client.CreateClientUseCase;
+import usecase.order.AddOrderItemUseCase;
+import usecase.order.CreateOrderUseCase;
 
 public class Main {
 
@@ -20,14 +25,21 @@ public class Main {
         OrderRepository orderRepository = new OrderRepositoryInMemory();
 
         //Adicionando user anônimo
-        clientRepository.addClient(new Client());
+        int firstId = 0;
+        clientRepository.addClient(new Client(), firstId);
 
         //Inicializando Usecases
-        CreateClientUseCase newClientUseCase = new CreateClientUseCase(clientRepository);
-        AuthClientUseCase authClientUseCase = new AuthClientUseCase(clientRepository);
+        CreateClientUseCase newClient = new CreateClientUseCase(clientRepository);
+        AuthClientUseCase authClient = new AuthClientUseCase(clientRepository);
+
+        AddOrderItemUseCase addOrder = new AddOrderItemUseCase(productRepository);
+        CreateOrderUseCase createOrder = new CreateOrderUseCase(orderRepository);
 
         //Inicializando Ui
-        AuthUI userInterface = new AuthUI(authClientUseCase);
+        ClientUI clientUI = new ClientUI(clientRepository, newClient);
+        AuthUI authUI = new AuthUI(authClient, clientUI);
+        OrderUI orderUI = new OrderUI(addOrder, createOrder);
+        MainMenuUI userInterface = new MainMenuUI(clientUI, authUI,orderUI);
 
         //Iniciando Sistema
         userInterface.start();

@@ -7,12 +7,16 @@ import usecase.client.AuthClientUseCase;
 import java.util.InputMismatchException;
 
 public class AuthUI extends SystemUI {
-    //Atributos
-    AuthClientUseCase authClientUseCase;
+    //UseCases
+    private AuthClientUseCase authClientUseCase;
+
+    //Interfaces aux
+    private ClientUI clientUI;
 
     //Construtor
-    public AuthUI(AuthClientUseCase authClientUseCase) {
+    public AuthUI(AuthClientUseCase authClientUseCase,  ClientUI clientUI) {
         this.authClientUseCase = authClientUseCase;
+        this.clientUI = clientUI;
     }
 
     public Client start(){
@@ -31,10 +35,10 @@ public class AuthUI extends SystemUI {
                     case 1:
                          return loginInterface();
                     case 2:
-                        createUserUi();
+                        clientUI.createUser();
                         break;
                     case 3:
-
+                        break;
                     case 4:
                         authClientIsrunning = false;
                         break;
@@ -49,8 +53,9 @@ public class AuthUI extends SystemUI {
                 System.out.println("Only numbers can be accepted");
             }
         }
-        throw new RuntimeException();
+        return null;
     }
+
     public Client loginInterface(){
         showTitle("Login");
         String email = enterEmail();
@@ -64,8 +69,9 @@ public class AuthUI extends SystemUI {
         } catch (Exception e) {
             System.out.println("Unexpected error: " + e.getMessage());
         }
-        throw new RuntimeException("Unexpected error: Bababoi");
+        return null;
     }
+
 
 
 

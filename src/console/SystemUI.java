@@ -33,10 +33,6 @@ public abstract class SystemUI {
         System.out.print("Digite sua senha: ");
         return scan.nextLine();
     }
-    public void createUserUi(){
-        String novoNome = enterName();
-        String novoSenha = enterPassword();
-    }
 
     //Orders I/O
     public String enterProductName(){

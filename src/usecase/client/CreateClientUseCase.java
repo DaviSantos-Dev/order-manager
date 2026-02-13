@@ -14,19 +14,19 @@ public class CreateClientUseCase {
     }
 
     //Executor
-    public Client execute(String clientName,String email,String password, boolean vip){
+    public Client execute(String name, String email, String password, boolean vip){
         int currentId = clientRepository.nextId();
 
-        if(clientName == null || clientName.isBlank()){
+        if(name == null || name.isBlank()){
             throw new BusinessRuleException("Client name cannot be empty");
         }
         if(password == null || password.isBlank()){
             throw new BusinessRuleException("Password cannot be empty");
         }
-        if(!clientRepository.emailExists(email)){
+        if(clientRepository.emailExists(email)){
             throw new BusinessRuleException("Email already exists");
         }
-        Client client = new Client(currentId, clientName,email,  password, vip);
+        Client client = new Client(name,email,  password, vip);
         clientRepository.addClient(client);
 
         return client;

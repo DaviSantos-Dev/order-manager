@@ -6,13 +6,15 @@ import java.util.InputMismatchException;
 
 public class MainMenuUI extends SystemUI {
     //Interfaces de Usuário
-    AuthUI authUI;
-    OrderUI orderUI;
+    private AuthUI authUI;
+    private OrderUI orderUI;
+    private ClientUI clientUI;
 
     //Construtor
-    public MainMenuUI(AuthUI authUI, OrderUI orderUI) {
+    public MainMenuUI(ClientUI clientUI, AuthUI authUI, OrderUI orderUI) {
         this.authUI = authUI;
         this.orderUI = orderUI;
+        this.clientUI = clientUI;
     }
 
     //Métodos

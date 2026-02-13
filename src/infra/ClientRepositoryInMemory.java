@@ -17,7 +17,11 @@ public class ClientRepositoryInMemory implements ClientRepository {
     @Override
     public void addClient(Client client) {
         this.clients.add(client);
+        if (!client.getClientName().equals("Anonymous")) {
+            client.setClientId(nextId());
+        }
     }
+
 
     @Override
     public List<Client> listClients() {
@@ -60,10 +64,10 @@ public class ClientRepositoryInMemory implements ClientRepository {
     public boolean emailExists(String email){
         for (Client client : clients) {
             if (client.getClientEmail().equals(email)){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 }

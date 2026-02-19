@@ -16,6 +16,7 @@ import usecase.client.CreateClientUseCase;
 import usecase.client.NonUserEntryUseCase;
 import usecase.order.AddOrderItemUseCase;
 import usecase.order.CreateOrderUseCase;
+import usecase.order.DeleteOrderUseCase;
 
 public class Main {
 
@@ -31,15 +32,17 @@ public class Main {
         //Inicializando Usecases
         CreateClientUseCase newClient = new CreateClientUseCase(clientRepository);
         AuthClientUseCase authClient = new AuthClientUseCase(clientRepository);
+        NonUserEntryUseCase nonUserEntry = new NonUserEntryUseCase(clientRepository);
 
         AddOrderItemUseCase addOrder = new AddOrderItemUseCase(productRepository);
         CreateOrderUseCase createOrder = new CreateOrderUseCase(orderRepository);
-        NonUserEntryUseCase nonUserEntry = new NonUserEntryUseCase(clientRepository);
+        DeleteOrderUseCase deleteOrder = new DeleteOrderUseCase(orderRepository);
+
 
         //Inicializando Ui
         ClientUI clientUI = new ClientUI(clientRepository, newClient);
         AuthUI authUI = new AuthUI(authClient, nonUserEntry, clientUI);
-        OrderUI orderUI = new OrderUI(addOrder, createOrder, orderRepository);
+        OrderUI orderUI = new OrderUI(addOrder, createOrder, orderRepository, deleteOrder);
         MainMenuUI userInterface = new MainMenuUI(clientUI, authUI,orderUI);
 
         //Iniciando Sistema

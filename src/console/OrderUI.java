@@ -7,6 +7,7 @@ import domain.exceptions.BusinessRuleException;
 import domain.repositories.OrderRepository;
 import usecase.order.AddOrderItemUseCase;
 import usecase.order.CreateOrderUseCase;
+import usecase.order.DeleteOrderUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,14 @@ public class OrderUI extends SystemUI {
     AddOrderItemUseCase addOrderItem;
     CreateOrderUseCase createOrder;
     OrderRepository orderRepository;
+    DeleteOrderUseCase deleteOrder;
 
     //Construtor
-    public OrderUI(AddOrderItemUseCase addOrderItem, CreateOrderUseCase createOrder, OrderRepository orderRepository) {
+    public OrderUI(AddOrderItemUseCase addOrderItem, CreateOrderUseCase createOrder, OrderRepository orderRepository, DeleteOrderUseCase deleteOrder) {
         this.addOrderItem = addOrderItem;
         this.createOrder = createOrder;
         this.orderRepository = orderRepository;
+        this.deleteOrder = deleteOrder;
     }
 
     //Métodos
@@ -66,31 +69,49 @@ public class OrderUI extends SystemUI {
     }
 
     public void deleteOrder(Client client) {
-
+        showTitle("Chose the Order to Delete");
+        int orderToDelete = enterProductCode();
+        try{
+            deleteOrder.execute(client, orderToDelete);
+        }catch (BusinessRuleException e){
+            System.out.println(e.getMessage());
+        } catch (RuntimeException e){
+            System.out.println("Unexpected error occurred.");
+        }
     }
 
     public void showOrder(Client client){
+        boolean orderMenuRunning = true;
         int option;
         showTitle("Seus pedidos");
         listOrders(client);
         separationRows();
+        while (orderMenuRunning) {
             System.out.println("Escolha uma opção:");
-        System.out.println("1 - Criar novo pedido");
-        System.out.println("2 - Excluir pedido");
-        System.out.println("3 - Voltar para menu inicial");
-        separationRows();
-        System.out.print("Sua opção: ");
-        option = Integer.parseInt(scan.nextLine());
-        switch (option) {
-            case 1:
-                createOrder(client);
-                break;
-            case 2:
-                deleteOrder(client);
-                break;
-            case 3:
-                break;
+            System.out.println("1 - Criar novo pedido");
+            System.out.println("2 - Excluir pedido");
+            System.out.println("3 - Voltar para menu inicial");
+            separationRows();
+            try {
+                System.out.print("Sua opção: ");
+                option = Integer.parseInt(scan.nextLine());
+                switch (option) {
+                    case 1:
+                        createOrder(client);
+                        orderMenuRunning = false;
+                        break;
+                    case 2:
+                        deleteOrder(client);
+                        break;
+                    case 3:
+                        orderMenuRunning = false;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Invalid value, enter a number");
+            } catch (BusinessRuleException e) {
+                System.out.println("Error: Invalid value, enter a valid mumber");
+            }
         }
-
     }
 }

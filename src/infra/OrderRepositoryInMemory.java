@@ -1,5 +1,6 @@
 package infra;
 
+import domain.entities.Client;
 import domain.entities.Order;
 import domain.entities.Product;
 import domain.exceptions.BusinessRuleException;
@@ -25,6 +26,11 @@ public class OrderRepositoryInMemory implements OrderRepository {
             throw new BusinessRuleException("Error: Order couldn't  be added!");
         }
 
+    }
+
+    @Override
+    public void deleteOrder(Order order){
+        orders.remove(order);
     }
 
     @Override

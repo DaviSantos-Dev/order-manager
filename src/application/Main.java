@@ -39,7 +39,7 @@ public class Main {
         //Inicializando Ui
         ClientUI clientUI = new ClientUI(clientRepository, newClient);
         AuthUI authUI = new AuthUI(authClient, nonUserEntry, clientUI);
-        OrderUI orderUI = new OrderUI(addOrder, createOrder);
+        OrderUI orderUI = new OrderUI(addOrder, createOrder, orderRepository);
         MainMenuUI userInterface = new MainMenuUI(clientUI, authUI,orderUI);
 
         //Iniciando Sistema
@@ -47,7 +47,7 @@ public class Main {
 
 
 
-        /*Criando produtos
+        /*Criação produtos
         ("Notebook Dell Inspiron", 3500.00, 10);
         ("Mouse Gamer Logitech", 150.90, 50);
         ("Teclado Mecânico Redragon", 320.50, 30);

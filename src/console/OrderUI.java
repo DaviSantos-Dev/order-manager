@@ -4,6 +4,7 @@ import domain.entities.Client;
 import domain.entities.Order;
 import domain.entities.OrderItem;
 import domain.exceptions.BusinessRuleException;
+import domain.repositories.OrderRepository;
 import usecase.order.AddOrderItemUseCase;
 import usecase.order.CreateOrderUseCase;
 
@@ -14,14 +15,35 @@ public class OrderUI extends SystemUI {
     //Atributos
     AddOrderItemUseCase addOrderItem;
     CreateOrderUseCase createOrder;
+    OrderRepository orderRepository;
 
     //Construtor
-    public OrderUI(AddOrderItemUseCase addOrderItem, CreateOrderUseCase createOrder) {
+    public OrderUI(AddOrderItemUseCase addOrderItem, CreateOrderUseCase createOrder, OrderRepository orderRepository) {
         this.addOrderItem = addOrderItem;
         this.createOrder = createOrder;
+        this.orderRepository = orderRepository;
     }
 
     //Métodos
+    public void showOrderItems(List<OrderItem> produtos){
+        int index = 1;
+        for (OrderItem item : produtos){
+            System.out.println("======================");
+            System.out.println("Item Nº" + index + ":");
+            System.out.println(item.toString());
+            System.out.println("======================");
+            index++;
+        }
+    }
+
+    public void listOrders(Client client){
+        for (Order order: orderRepository.listOrders()){
+            if (order.getClient().equals(client)){
+                System.out.println("ID: " + order.getOrderId() + "Status: " + order.getOrderStatus());
+            }
+        }
+    }
+
     public void createOrder(Client client) {
         int orderItemId = 0;
         List<OrderItem> items = new ArrayList<>();
@@ -41,5 +63,34 @@ public class OrderUI extends SystemUI {
         } catch (BusinessRuleException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public void deleteOrder(Client client) {
+
+    }
+
+    public void showOrder(Client client){
+        int option;
+        showTitle("Seus pedidos");
+        listOrders(client);
+        separationRows();
+            System.out.println("Escolha uma opção:");
+        System.out.println("1 - Criar novo pedido");
+        System.out.println("2 - Excluir pedido");
+        System.out.println("3 - Voltar para menu inicial");
+        separationRows();
+        System.out.print("Sua opção: ");
+        option = Integer.parseInt(scan.nextLine());
+        switch (option) {
+            case 1:
+                createOrder(client);
+                break;
+            case 2:
+                deleteOrder(client);
+                break;
+            case 3:
+                break;
+        }
+
     }
 }

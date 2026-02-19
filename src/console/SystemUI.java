@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class SystemUI {
-    protected static Scanner scan = new Scanner(System.in);
+    protected Scanner scan = new Scanner(System.in);
 
     //Padrões para criação de telas
     public void separationRows(){
@@ -49,17 +49,8 @@ public abstract class SystemUI {
     }
 
 
-    //Exibição de pedido
-    public void mostrarPedido(List<OrderItem> produtos){
-        int index = 1;
-        for (OrderItem item : produtos){
-            System.out.println("======================");
-            System.out.println("Item Nº" + index + ":");
-            System.out.println(item.toString());
-            System.out.println("======================");
-            index++;
-        }
-    }
+    //Orders UI
+
 
     //Telas de criação
     public void clientCreated(Client client){

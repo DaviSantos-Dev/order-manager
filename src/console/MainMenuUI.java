@@ -3,8 +3,6 @@ package console;
 import domain.entities.Client;
 import domain.exceptions.BusinessRuleException;
 
-import java.util.InputMismatchException;
-
 public class MainMenuUI extends SystemUI {
     //Interfaces de Usuário
     private AuthUI authUI;
@@ -26,7 +24,7 @@ public class MainMenuUI extends SystemUI {
 
     public void telaInicial(Client user){
         boolean systemRunning = true;
-        int opcao = 0;
+        int option = 0;
         showTitle("Inicio do Sistema");
         System.out.println("Escolha uma opção:");
         System.out.println("1 - Criar Pedido");
@@ -37,13 +35,13 @@ public class MainMenuUI extends SystemUI {
         while (systemRunning){
             try {
         System.out.print("Sua opção: ");
-                opcao = Integer.parseInt(scan.nextLine());
-                switch(opcao){
+                option = Integer.parseInt(scan.nextLine());
+                switch(option){
                     case 1:
                         orderUI.createOrder(user);
                         break;
                     case 2:
-                        ;
+                        orderUI.showOrder(user);
                         break;
                     case 3:
                         ;

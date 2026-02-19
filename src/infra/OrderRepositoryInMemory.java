@@ -10,7 +10,7 @@ import java.util.List;
 
 public class OrderRepositoryInMemory implements OrderRepository {
     //Atributos
-    List<Order> orders =  new ArrayList<>();
+    private List<Order> orders =  new ArrayList<>();
 
     //Construtor
     public OrderRepositoryInMemory() {} //Sempre deve ser instanciado vazio.

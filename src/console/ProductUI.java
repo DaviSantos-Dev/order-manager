@@ -80,6 +80,10 @@ public class ProductUI extends SystemUI{
             System.out.println("Qual o ID do  produto?");
             Product product = productRepository.searchById(Integer.parseInt(scan.nextLine()));
             deleteProductUseCase.execute(client, product);
+        } catch (BusinessRuleException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Value format invallid");
         }
     }
 

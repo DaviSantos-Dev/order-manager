@@ -39,6 +39,9 @@ public class Product {
     public double getProductPrice(){
         return productPrice;
     }
+    public void setProductPrice(double productPrice){
+        this.productPrice = productPrice;
+    }
     public int getProductQuantity(){
         return productQuantity;
     }
@@ -56,7 +59,7 @@ public class Product {
         }
         if (productQuantity == quantity) {
             productQuantity -= quantity;
-            productStatus = ProductStatus.INACTIVE;
+            productStatus = ProductStatus.OUT_OF_STOCK;
         }else {
             productQuantity -= quantity;
         }
@@ -68,5 +71,16 @@ public class Product {
             productStatus = ProductStatus.ACTIVE;
         }
         productQuantity += quantity;
+    }
+
+    public void desactivateProduct(){
+        productStatus = ProductStatus.INACTIVE;
+    }
+
+    @Override
+    public String toString(){
+        return "ID: " + productId +
+                "\nProduct Name: " + productName + " - Price: R$" + productPrice
+                + "\nQuantity: " + productQuantity;
     }
 }

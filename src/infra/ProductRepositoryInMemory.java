@@ -47,6 +47,11 @@ public class ProductRepositoryInMemory implements ProductRepository {
         return newList;
     }
 
+    @Override
+    public void deleteProduct(Product product) {
+        products.remove(product);
+    }
+
     private int nextId(){
         int currentId = 1;
         for (Product product : products) {

@@ -8,12 +8,14 @@ public class MainMenuUI extends SystemUI {
     private AuthUI authUI;
     private OrderUI orderUI;
     private ClientUI clientUI;
+    private ProductUI productUI;
 
     //Construtor
-    public MainMenuUI(ClientUI clientUI, AuthUI authUI, OrderUI orderUI) {
+    public MainMenuUI(ClientUI clientUI, AuthUI authUI, OrderUI orderUI,  ProductUI productUI) {
         this.authUI = authUI;
         this.orderUI = orderUI;
         this.clientUI = clientUI;
+        this.productUI = productUI;
     }
 
     //Métodos

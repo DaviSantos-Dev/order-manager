@@ -10,5 +10,6 @@ public interface ProductRepository {
     List<Product> listProducts();
     Product searchById(int id);
     List<Product> searchByName(String nome);
+    void deleteProduct(Product product);
 }
 

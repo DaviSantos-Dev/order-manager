@@ -46,7 +46,7 @@ public class MainMenuUI extends SystemUI {
                         orderUI.showOrder(user);
                         break;
                     case 3:
-                        ;
+                        productUI.showProducts(user);
                         break;
                     case 4:
                         systemRunning = false;

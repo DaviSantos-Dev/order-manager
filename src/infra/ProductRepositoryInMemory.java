@@ -55,7 +55,7 @@ public class ProductRepositoryInMemory implements ProductRepository {
     private int nextId(){
         int currentId = 1;
         for (Product product : products) {
-            if (product.getIdProduto() > currentId){
+            if (product.getIdProduto() >= currentId){
                 currentId = product.getIdProduto() + 1;
             }
         }

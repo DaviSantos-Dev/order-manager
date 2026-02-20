@@ -62,7 +62,7 @@ public class OrderRepositoryInMemory implements OrderRepository {
     private int nextId(){
         int currentId = 1;
         for (Order order : orders) {
-            if (order.getOrderId() > currentId){
+            if (order.getOrderId() >= currentId){
                 currentId = order.getOrderId() + 1;
             }
         }

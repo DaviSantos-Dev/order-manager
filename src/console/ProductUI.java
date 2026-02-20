@@ -18,9 +18,11 @@ public class ProductUI extends SystemUI{
     private DeleteProductUseCase deleteProductUseCase;
 
     //Constructor
-    public ProductUI(ProductRepository productRepository,  CreateProductUseCase createProductUseCase) {
+    public ProductUI(ProductRepository productRepository,  CreateProductUseCase createProductUseCase, UpdateProductUseCase updateProductUseCase, DeleteProductUseCase deleteProductUseCase) {
         this.productRepository = productRepository;
         this.createProductUseCase = createProductUseCase;
+        this.updateProductUseCase = updateProductUseCase;
+        this.deleteProductUseCase = deleteProductUseCase;
     }
 
     //Métodos

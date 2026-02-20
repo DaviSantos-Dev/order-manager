@@ -30,7 +30,6 @@ public class AuthUI extends SystemUI {
             System.out.println("1 - Entrar com seu usuário e senha");
             System.out.println("2 - Cadastrar novo usuário");
             System.out.println("3 - Entrar sem usuário");
-            System.out.println("4 - Fechar o programa");
             System.out.print("Sua opção: ");
             try {
                 int option = Integer.parseInt(scan.nextLine());
@@ -42,9 +41,6 @@ public class AuthUI extends SystemUI {
                         break;
                     case 3:
                         return nonUserEntryUseCase.execute();
-                    case 4:
-                        authClientIsrunning = false;
-                        break;
                     default:
                         System.out.println("Invallid option");
                 }

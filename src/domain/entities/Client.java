@@ -10,11 +10,11 @@ public class Client {
     private ClientType clientType;
 
     //Construtor
-    public Client(String name,String email, String password, boolean vip){
+    public Client(String name,String email, String password){
         clientName = name;
         clientEmail = email;
         clientPassword = password;
-        activateVip(vip);
+        clientType = ClientType.NORMAL;
     }
     public Client(){
         this.clientId = 0;

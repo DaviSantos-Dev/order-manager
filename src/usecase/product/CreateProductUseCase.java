@@ -27,9 +27,8 @@ public class CreateProductUseCase {
         }
         if (quantity == 0) {
             productRepository.addProduct(new Product(name, price));
-            System.out.println("Product added successfully");
+        } else {
+            productRepository.addProduct(new Product(name, price, quantity));
         }
-        productRepository.addProduct(new Product(name, price, quantity));
-        System.out.println("Product added successfully");
     }
 }

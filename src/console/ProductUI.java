@@ -42,6 +42,7 @@ public class ProductUI extends SystemUI{
             System.out.println("Qual o quantidade Inicial?");
             int productQuantity = Integer.parseInt(scan.nextLine());
             createProductUseCase.execute(productName, productPrice, productQuantity);
+            System.out.println("Product added successfully");
         } catch (NumberFormatException e) {
             System.out.println("Error: Value format invallid");
         } catch (BusinessRuleException e) {
@@ -66,7 +67,7 @@ public class ProductUI extends SystemUI{
 
             System.out.println("Deseja desativar o produto? (S/N)");
             System.out.print("Resposta: ");
-            boolean status = scan.nextLine() == "S";
+            boolean status = scan.nextLine().equals("S");
 
             updateProductUseCase.execute(product, name, price, status);
         } catch (BusinessRuleException e) {

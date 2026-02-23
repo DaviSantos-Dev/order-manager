@@ -114,8 +114,8 @@ public class ProductUI extends SystemUI{
                         updateProduct();
                         ProductMenuRunning = false;
                     case 3:
-
-                        break;
+                        deleteProduct(client);
+                        ProductMenuRunning = false;
                     case 4:
                         ProductMenuRunning = false;
                     break;

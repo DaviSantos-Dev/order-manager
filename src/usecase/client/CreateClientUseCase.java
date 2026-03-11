@@ -24,7 +24,10 @@ public class CreateClientUseCase {
         if(clientRepository.emailExists(email)){
             throw new BusinessRuleException("Email already exists");
         }
-        Client client = new Client(name,email,  password, vip);
+        Client client = new Client(name,email, password);
+        if (vip){
+            client.activateVip(true);
+        }
         clientRepository.addClient(client);
 
         return client;

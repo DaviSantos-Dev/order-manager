@@ -1,15 +1,13 @@
 package infra;
 
-import domain.entities.Client;
 import domain.entities.Order;
-import domain.entities.Product;
 import domain.exceptions.BusinessRuleException;
 import domain.repositories.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderRepositoryInMemory implements OrderRepository {
+public class OrderRepositoryInMemory{
     //Atributos
     private List<Order> orders =  new ArrayList<>();
 
@@ -17,7 +15,7 @@ public class OrderRepositoryInMemory implements OrderRepository {
     public OrderRepositoryInMemory() {} //Sempre deve ser instanciado vazio.
 
     //Métodos
-    @Override
+
     public void addOrder(Order order) {
         try{
             orders.add(order);
@@ -28,17 +26,17 @@ public class OrderRepositoryInMemory implements OrderRepository {
 
     }
 
-    @Override
+
     public void deleteOrder(Order order){
         orders.remove(order);
     }
 
-    @Override
+
     public List<Order> listOrders() {
         return new ArrayList<>(orders);
     }
 
-    @Override
+
     public Order searchById(int id) {
         for (Order order : orders) {
             if (order.getOrderId() == id) {
@@ -48,7 +46,7 @@ public class OrderRepositoryInMemory implements OrderRepository {
         throw new BusinessRuleException("Order not found");
     }
 
-    @Override
+
     public List<Order> searchByClient(String name) { //Retorna lista de pedidos do usuário
         List<Order> newList = new ArrayList<>();
         for (Order order : orders) {

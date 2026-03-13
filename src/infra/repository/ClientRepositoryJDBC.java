@@ -19,18 +19,17 @@ public class ClientRepositoryJDBC implements ClientRepository {
                     "INSERT INTO Clients " +
                     "(Name, Email, Password, Client_Type) " +
                     "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)){
-            conn.setAutoCommit(false);
 
             stt.setString(1, client.getClientName());
             stt.setString(2, client.getClientEmail());
             stt.setString(3, client.getClientPassword());
             stt.setString(4, client.getClientType().toString());
 
-            int rowsAffected = stt.executeUpdate();
-
-            if(rowsAffected > 0){
-                ResultSet rs = stt.getGeneratedKeys();
-                System.out.printf("Done! The ID of %s is %d\n", client.getClientName(), rs.getInt(1));
+            try(ResultSet rs = stt.executeQuery()) {
+                if (rs.getInt(1) > 0) {
+                    client.setClientId(rs.getInt(1));
+                    System.out.printf("Done! The ID of %s is %d\n", client.getClientName(), client.getClientId());
+                }
             }
         }
         catch(SQLException e){

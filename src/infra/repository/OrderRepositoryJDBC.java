@@ -1,11 +1,14 @@
 package infra.repository;
 
+import domain.entities.Client;
 import domain.entities.Order;
+import domain.enums.OrderStatus;
 import domain.repositories.OrderRepository;
 import infra.db.DB;
 import infra.db.DbException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepositoryJDBC implements OrderRepository {
@@ -36,7 +39,42 @@ public class OrderRepositoryJDBC implements OrderRepository {
 
     @Override
     public List<Order> listOrders() {
-        return  null;
+        List<Order> orders = new ArrayList<>();
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement(
+            "SELECT o.Id as Order_Id, " +
+                "c.Name as Client_Name, " +
+                "c.Email as Client_Email, " +
+                "c.Password as Client_Password, " +
+                "o.Status as Order_Status " +
+                "From Orders as o " +
+                "JOIN Clients as c " +
+                "ON o.Client_Id = c.Id");
+            ResultSet rs = stt.executeQuery()){
+
+            while(rs.next()){
+                String clientName = rs.getString("Client_Name");
+                String clientEmail = rs.getString("Client_Email");
+                String clientPassword = rs.getString("Client_Password");
+                Client client = new Client(clientName, clientEmail, clientPassword);
+
+                Order order = new Order(client);
+                String status = rs.getString("Order_Status");
+                if(status.equals("PAID")){
+                    order.payOrder();
+                }
+                if(status.equals("CANCELED")){
+                    order.cancelOrder();
+                }
+
+                order.setOrderId(rs.getInt("Order_Id"));
+                orders.add(order);
+            }
+            return   orders;
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

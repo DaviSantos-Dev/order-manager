@@ -53,6 +53,7 @@ public class ClientRepositoryJDBC implements ClientRepository {
 
                 clients.add(new Client(name, email, password, clientType));
             }
+
             return clients;
         }
         catch(SQLException e){

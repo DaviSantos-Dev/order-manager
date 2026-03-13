@@ -24,6 +24,7 @@ public class Client {
         clientEmail = email;
         clientPassword = password;
         this.clientType =  clientType;
+        clientStatus = ClientStatus.ACTIVE;
     }
     public Client(){
         this.clientId = 0;
@@ -31,6 +32,7 @@ public class Client {
         this.clientEmail = "empty";
         this.clientPassword = "empty";
         this.clientType = ClientType.NON_USER;
+        clientStatus = ClientStatus.INACTIVE;
     }
 
     //Getters e Setters

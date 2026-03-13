@@ -14,7 +14,7 @@ public class Order {
     public Order(Client client){
         this.client = client;
         this.Products = new ArrayList<OrderItem>();
-        this.orderStatus = OrderStatus.CREATED;
+        this.orderStatus = OrderStatus.IN_PROGRESS;
     }
 
     //Getters e Setters
@@ -46,12 +46,12 @@ public class Order {
         return total;
     }
     public void payOrder() {
-        if (orderStatus.equals(OrderStatus.CREATED)){
+        if (orderStatus.equals(OrderStatus.IN_PROGRESS)){
             orderStatus = OrderStatus.PAID;
         }
     }
     public void cancelOrder(){
-        if (orderStatus.equals(OrderStatus.CREATED)) {
+        if (orderStatus.equals(OrderStatus.IN_PROGRESS)) {
             orderStatus = OrderStatus.CANCELED;
         }
     }

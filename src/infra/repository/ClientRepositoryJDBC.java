@@ -2,6 +2,7 @@ package infra.repository;
 
 import domain.entities.Client;
 import domain.enums.ClientType;
+import domain.exceptions.BusinessRuleException;
 import domain.repositories.ClientRepository;
 import infra.db.DB;
 import infra.db.DbException;
@@ -92,7 +93,8 @@ public class ClientRepositoryJDBC implements ClientRepository {
     @Override
     public boolean emailExists(String email) {
         try(Connection conn = DB.getConnection();
-            PreparedStatement stt = conn.prepareStatement("SELECT COUNT(*) as total FROM clients WHERE Email = ?")){
+            PreparedStatement stt = conn.prepareStatement(
+                    "SELECT COUNT(*) as total FROM clients WHERE Email = ?")){
             stt.setString(1, email);
 
             try(ResultSet rs = stt.executeQuery()){
@@ -106,11 +108,31 @@ public class ClientRepositoryJDBC implements ClientRepository {
 
     @Override
     public void updateClient(Client client) {
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement("UPDATE clients " +
+                    "set Name = ?, Email = ?, Password = ?, Client_Type = ? " +
+                    "WHERE Id = ?")){
+            // Definindo novos valores
+            stt.setString(1, client.getClientName());
+            stt.setString(2, client.getClientEmail());
+            stt.setString(3, client.getClientPassword());
+            stt.setString(4, client.getClientType().name());
 
+            // Definindo parâmetro de busca
+            stt.setInt(5, client.getClientId());
+
+            int result = stt.executeUpdate();
+            if(result == 0){
+                throw new DbException("Client not found");
+            }
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteClient(int id) {
+    public void deactivateClient(int id) {
 
     }
 }

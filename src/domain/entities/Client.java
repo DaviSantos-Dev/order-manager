@@ -1,4 +1,5 @@
 package domain.entities;
+import domain.enums.ClientStatus;
 import domain.enums.ClientType;
 
 public class Client {
@@ -8,6 +9,7 @@ public class Client {
     private String clientEmail;
     private String clientPassword;
     private ClientType clientType;
+    private ClientStatus clientStatus;
 
     //Construtor
     public Client(String name,String email, String password){
@@ -15,6 +17,7 @@ public class Client {
         clientEmail = email;
         clientPassword = password;
         clientType = ClientType.NORMAL;
+        clientStatus = ClientStatus.ACTIVE;
     }
     public Client(String name,String email, String password, ClientType clientType){
         clientName = name;

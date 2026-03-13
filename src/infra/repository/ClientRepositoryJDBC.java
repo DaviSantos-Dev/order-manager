@@ -64,21 +64,25 @@ public class ClientRepositoryJDBC implements ClientRepository {
     @Override
     public Client searchById(int id) {
         try(Connection conn = DB.getConnection();
-            PreparedStatement pst= conn.prepareStatement("SELECT * FROM clients WHERE id = ?")){
-            pst.setInt(1, id);
+            PreparedStatement stt = conn.prepareStatement("SELECT * FROM clients WHERE id = ?")){
+            stt.setInt(1, id);
 
-            ResultSet rs = pst.executeQuery();
+            try (ResultSet rs = stt.executeQuery()) {
+                if (rs.next()) {
+                    String name = rs.getString("Name");
+                    String email = rs.getString("Email");
+                    String password = rs.getString("Password");
+                    ClientType clientType = ClientType.valueOf(rs.getString("Client_Type").toUpperCase());
 
-            String name = rs.getString("Name");
-            String email = rs.getString("Email");
-            String password = rs.getString("Password");
-            ClientType clientType = ClientType.valueOf(rs.getString("Client_Type").toUpperCase());
 
-
-            Client client = new Client(name, email, password, clientType);
-            client.setClientId(id);
-
-            return client;
+                    Client client = new Client(name, email, password, clientType);
+                    client.setClientId(id);
+                    return client;
+                }
+                else{
+                    return null;
+                }
+            }
         }
         catch (SQLException e){
             throw new DbException(e.getMessage());
@@ -87,7 +91,17 @@ public class ClientRepositoryJDBC implements ClientRepository {
 
     @Override
     public boolean emailExists(String email) {
-        return false;
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement("SELECT COUNT(*) as total FROM clients WHERE Email = ?")){
+            stt.setString(1, email);
+
+            try(ResultSet rs = stt.executeQuery()){
+                rs.next();
+                return rs.getInt("total") > 0;
+            }
+        } catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

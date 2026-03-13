@@ -10,6 +10,5 @@ public interface ClientRepository {
     Client searchById(int id);
     boolean emailExists(String email);
     void updateClient(Client client);
-    void deactivateClient(int id);
 }
 

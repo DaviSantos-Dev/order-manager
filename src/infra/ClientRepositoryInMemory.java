@@ -38,7 +38,6 @@ public class ClientRepositoryInMemory implements ClientRepository {
         return null;
     }
 
-    @Override
     public List<Client> searchByName(String nome) {
         List<Client> newList = new ArrayList<>();
         for (Client client : clients) {
@@ -67,6 +66,11 @@ public class ClientRepositoryInMemory implements ClientRepository {
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateClient(Client client) {
+
     }
 
 }

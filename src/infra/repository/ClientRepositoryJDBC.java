@@ -2,7 +2,6 @@ package infra.repository;
 
 import domain.entities.Client;
 import domain.enums.ClientType;
-import domain.exceptions.BusinessRuleException;
 import domain.repositories.ClientRepository;
 import infra.db.DB;
 import infra.db.DbException;
@@ -129,10 +128,5 @@ public class ClientRepositoryJDBC implements ClientRepository {
         catch(SQLException e){
             throw new DbException(e.getMessage());
         }
-    }
-
-    @Override
-    public void deactivateClient(int id) {
-
     }
 }

@@ -36,7 +36,6 @@ public class DB {
                         throw new DbException("Falha ao executar: " + cmd);
                     }
                 }
-
             }
             System.out.println("Database created");
 

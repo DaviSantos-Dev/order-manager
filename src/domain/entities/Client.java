@@ -16,6 +16,12 @@ public class Client {
         clientPassword = password;
         clientType = ClientType.NORMAL;
     }
+    public Client(String name,String email, String password, ClientType clientType){
+        clientName = name;
+        clientEmail = email;
+        clientPassword = password;
+        this.clientType =  clientType;
+    }
     public Client(){
         this.clientId = 0;
         this.clientName = "Anonymous";
@@ -54,6 +60,7 @@ public class Client {
         }
         clientType = (vip) ? ClientType.VIP : ClientType.NORMAL;
     }
+
     public String showClient(){
         return "Name: " + clientName + "ID: " + clientId + "\n" +
                 "Email: " + clientEmail + "\n" +
@@ -67,6 +74,6 @@ public class Client {
                 "Name: " + clientName + "\n" +
                 "Email: " + clientEmail + "\n" +
                 "Password: " + clientPassword + "\n" +
-                "VIP: " + (clientType == ClientType.VIP ? "Activated" : "Desactivated");
+                "VIP: " + (clientType == ClientType.VIP ? "Activated" : "Deactivated");
     }
 }

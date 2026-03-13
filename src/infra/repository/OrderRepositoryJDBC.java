@@ -65,7 +65,31 @@ public class OrderRepositoryJDBC implements OrderRepository {
 
     @Override
     public Order searchById(int id) {
-        return  null;
+        Order order = null;
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement(
+            "SELECT o.Id as Order_Id, " +
+                "c.Name as Client_Name, " +
+                "c.Email as Client_Email, " +
+                "c.Password as Client_Password, " +
+                "o.Status as Order_Status " +
+                "From Orders as o " +
+                "JOIN Clients as c " +
+                "ON o.Client_Id = c.Id " +
+                "WHERE o.Id = ?")){
+
+            stt.setInt(1, id);
+
+            try (ResultSet rs = stt.executeQuery()){
+                if (rs.next()){
+                    order = mapOrder(rs);
+                }
+            }
+            return order;
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

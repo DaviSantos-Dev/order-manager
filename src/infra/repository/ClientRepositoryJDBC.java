@@ -32,7 +32,6 @@ public class ClientRepositoryJDBC implements ClientRepository {
                 ResultSet rs = stt.getGeneratedKeys();
                 System.out.printf("Done! The ID of %s is %d\n", client.getClientName(), rs.getInt(1));
             }
-
         }
         catch(SQLException e){
             throw new DbException(e.getMessage());
@@ -64,7 +63,26 @@ public class ClientRepositoryJDBC implements ClientRepository {
 
     @Override
     public Client searchById(int id) {
-        return null;
+        try(Connection conn = DB.getConnection();
+            PreparedStatement pst= conn.prepareStatement("SELECT * FROM clients WHERE id = ?")){
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            String name = rs.getString("Name");
+            String email = rs.getString("Email");
+            String password = rs.getString("Password");
+            ClientType clientType = ClientType.valueOf(rs.getString("Client_Type").toUpperCase());
+
+
+            Client client = new Client(name, email, password, clientType);
+            client.setClientId(id);
+
+            return client;
+        }
+        catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

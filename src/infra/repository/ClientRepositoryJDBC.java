@@ -41,7 +41,25 @@ public class ClientRepositoryJDBC implements ClientRepository {
 
     @Override
     public List<Client> listClients() {
-        return null;
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement("SELECT * FROM Clients");
+            ResultSet rs = stt.executeQuery()){
+
+            List<Client> clients = new ArrayList<>();
+            while(rs.next()) {
+
+                String name = rs.getString("Name");
+                String email = rs.getString("Email");
+                String password = rs.getString("Password");
+                ClientType clientType = ClientType.valueOf(rs.getString("Client_Type").toUpperCase());
+
+                clients.add(new Client(name, email, password, clientType));
+            }
+            return clients;
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

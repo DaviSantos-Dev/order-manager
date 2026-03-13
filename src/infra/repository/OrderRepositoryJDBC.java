@@ -53,21 +53,7 @@ public class OrderRepositoryJDBC implements OrderRepository {
             ResultSet rs = stt.executeQuery()){
 
             while(rs.next()){
-                String clientName = rs.getString("Client_Name");
-                String clientEmail = rs.getString("Client_Email");
-                String clientPassword = rs.getString("Client_Password");
-                Client client = new Client(clientName, clientEmail, clientPassword);
-
-                Order order = new Order(client);
-                String status = rs.getString("Order_Status");
-                if(status.equals("PAID")){
-                    order.payOrder();
-                }
-                if(status.equals("CANCELED")){
-                    order.cancelOrder();
-                }
-
-                order.setOrderId(rs.getInt("Order_Id"));
+                Order order = mapOrder(rs);
                 orders.add(order);
             }
             return   orders;
@@ -79,11 +65,37 @@ public class OrderRepositoryJDBC implements OrderRepository {
 
     @Override
     public Order searchById(int id) {
-        return null;
+        return  null;
     }
 
     @Override
     public List<Order> searchByClientId(int id) {
         return List.of();
     }
+
+    private Order mapOrder(ResultSet rs){
+        try {
+            String clientName = rs.getString("Client_Name");
+            String clientEmail = rs.getString("Client_Email");
+            String clientPassword = rs.getString("Client_Password");
+            Client client = new Client(clientName, clientEmail, clientPassword);
+
+            Order order = new Order(client);
+            String status = rs.getString("Order_Status");
+            if (status.equals("PAID")) {
+                order.payOrder();
+            }
+            else if (status.equals("CANCELED")) {
+                order.cancelOrder();
+            }
+
+            order.setOrderId(rs.getInt("Order_Id"));
+
+            return order;
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
+    }
+
 }

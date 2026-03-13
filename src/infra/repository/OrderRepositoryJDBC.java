@@ -2,7 +2,6 @@ package infra.repository;
 
 import domain.entities.Client;
 import domain.entities.Order;
-import domain.enums.OrderStatus;
 import domain.repositories.OrderRepository;
 import infra.db.DB;
 import infra.db.DbException;
@@ -94,7 +93,31 @@ public class OrderRepositoryJDBC implements OrderRepository {
 
     @Override
     public List<Order> searchByClientId(int id) {
-        return List.of();
+        List<Order> orders = new ArrayList<>();
+        try(Connection conn = DB.getConnection();
+            PreparedStatement stt = conn.prepareStatement(
+            "SELECT o.Id as Order_Id, " +
+                "c.Name as Client_Name, " +
+                "c.Email as Client_Email, " +
+                "c.Password as Client_Password, " +
+                "o.Status as Order_Status " +
+                "From Orders as o " +
+                "JOIN Clients as c " +
+                "ON o.Client_Id = c.Id " +
+                "WHERE c.Id = ?")){
+
+            stt.setInt(1, id);
+
+            try (ResultSet rs = stt.executeQuery()){
+                while (rs.next()){
+                    orders.add(mapOrder(rs));
+                }
+            }
+            return orders;
+        }
+        catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     private Order mapOrder(ResultSet rs){

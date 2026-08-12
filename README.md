@@ -42,13 +42,13 @@ Projeto original (CLI): [Order Manager CLI](https://github.com/DaviSantos-Dev/or
 - Gerenciamento de itens do pedido
 
 ### v1.1 🚧 
-- Front-end 
-- Dashboard de pedidos
-
-### v1.2 
 - Spring Security
 - OAuth2 + JWT
 - Controle de permissões
+
+### v1.2 
+- Front-end 
+- Dashboard de pedidos
 
 ### v1.3
 - Testes automatizados com JUnit e Mockito
